@@ -18,6 +18,13 @@ public:
 	UNavData();
 	virtual ~UNavData();
 
+	void GetPosOnScreen(double UIHalfWidth = 0, double UIHalfHeight = 0);
+
+private:
+
+	static bool GetIntersectedPoint(FVector2D p1, FVector2D p2, FVector2D p3, FVector2D p4, FVector2D& res);
+	
+public:
 
 	UPROPERTY(BlueprintReadWrite)
 	double pos_x;
@@ -28,6 +35,12 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	double distance;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BluePrintReadOnly)
 	bool behind;
+
+	UPROPERTY(BluePrintReadOnly)
+	int status;
+
+	UPROPERTY(BluePrintReadOnly)
+	FVector2D realPos;
 };

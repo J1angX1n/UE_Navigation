@@ -11,6 +11,7 @@ void EmptyLinkFunctionForGeneratedCodeNavData() {}
 
 // Begin Cross Module References
 COREUOBJECT_API UClass* Z_Construct_UClass_UObject();
+COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2D();
 UE_NAVIGATION_API UClass* Z_Construct_UClass_UNavData();
 UE_NAVIGATION_API UClass* Z_Construct_UClass_UNavData_NoRegister();
 UPackage* Z_Construct_UPackage__Script_UE_Navigation();
@@ -57,6 +58,14 @@ struct Z_Construct_UClass_UNavData_Statics
 		{ "Category", "NavData" },
 		{ "ModuleRelativePath", "Public/NavData.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_status_MetaData[] = {
+		{ "Category", "NavData" },
+		{ "ModuleRelativePath", "Public/NavData.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_realPos_MetaData[] = {
+		{ "Category", "NavData" },
+		{ "ModuleRelativePath", "Public/NavData.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FDoublePropertyParams NewProp_pos_x;
 	static const UECodeGen_Private::FDoublePropertyParams NewProp_pos_y;
@@ -64,6 +73,8 @@ struct Z_Construct_UClass_UNavData_Statics
 	static const UECodeGen_Private::FDoublePropertyParams NewProp_distance;
 	static void NewProp_behind_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_behind;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_status;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_realPos;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -79,13 +90,17 @@ void Z_Construct_UClass_UNavData_Statics::NewProp_behind_SetBit(void* Obj)
 {
 	((UNavData*)Obj)->behind = 1;
 }
-const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UNavData_Statics::NewProp_behind = { "behind", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UNavData), &Z_Construct_UClass_UNavData_Statics::NewProp_behind_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_behind_MetaData), NewProp_behind_MetaData) };
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UNavData_Statics::NewProp_behind = { "behind", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UNavData), &Z_Construct_UClass_UNavData_Statics::NewProp_behind_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_behind_MetaData), NewProp_behind_MetaData) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UNavData_Statics::NewProp_status = { "status", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UNavData, status), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_status_MetaData), NewProp_status_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UNavData_Statics::NewProp_realPos = { "realPos", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UNavData, realPos), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_realPos_MetaData), NewProp_realPos_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UNavData_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNavData_Statics::NewProp_pos_x,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNavData_Statics::NewProp_pos_y,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNavData_Statics::NewProp_angle,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNavData_Statics::NewProp_distance,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNavData_Statics::NewProp_behind,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNavData_Statics::NewProp_status,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNavData_Statics::NewProp_realPos,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UNavData_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_UNavData_Statics::DependentSingletons[])() = {
@@ -124,14 +139,14 @@ DEFINE_VTABLE_PTR_HELPER_CTOR(UNavData);
 // End Class UNavData
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_UE_Navigation_Source_UE_Navigation_Public_NavData_h_Statics
+struct Z_CompiledInDeferFile_FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavData_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UNavData, UNavData::StaticClass, TEXT("UNavData"), &Z_Registration_Info_UClass_UNavData, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNavData), 554689551U) },
+		{ Z_Construct_UClass_UNavData, UNavData::StaticClass, TEXT("UNavData"), &Z_Registration_Info_UClass_UNavData, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNavData), 562485481U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_UE_Navigation_Source_UE_Navigation_Public_NavData_h_1538028706(TEXT("/Script/UE_Navigation"),
-	Z_CompiledInDeferFile_FID_UE_Navigation_Source_UE_Navigation_Public_NavData_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_UE_Navigation_Source_UE_Navigation_Public_NavData_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavData_h_733650101(TEXT("/Script/UE_Navigation"),
+	Z_CompiledInDeferFile_FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavData_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavData_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

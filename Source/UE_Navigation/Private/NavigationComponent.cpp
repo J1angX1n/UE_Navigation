@@ -8,6 +8,7 @@
 #include "NavigationTargetComponent.h"
 
 
+
 // Sets default values for this component's properties
 UNavigationComponent::UNavigationComponent()
 {
@@ -16,6 +17,7 @@ UNavigationComponent::UNavigationComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	show = false;
+	widgetWithin = NULL;
 }
 
 
@@ -23,7 +25,6 @@ UNavigationComponent::UNavigationComponent()
 void UNavigationComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
 	
 }
 
@@ -32,6 +33,9 @@ void UNavigationComponent::BeginPlay()
 void UNavigationComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+
+
 
 	// ...
 }
@@ -54,6 +58,8 @@ TArray<UNavData*> UNavigationComponent::GetAllNavDatas()
 	FVector worldPos, selfPos;
 	FVector2D screenPos;
 
+	double UIHalfWidth = 0, UIHalfHeight = 0;
+
 	if (world)
 	{
 		APlayerController* pc = UGameplayStatics::GetPlayerController(world, 0);
@@ -66,9 +72,15 @@ TArray<UNavData*> UNavigationComponent::GetAllNavDatas()
 		AActor* owner = GetOwner();
 		selfPos = owner->GetActorLocation();
 
+		if (widgetWithin)
+		{
+			UIHalfWidth = widgetWithin->GetDesiredSize().X;
+			UIHalfHeight = widgetWithin->GetDesiredSize().Y;
+		}
+
 		for (size_t i = 0; i < len; i++)
 		{
-			UNavData* data = NewObject<UNavData>();
+			UNavData* data = NewObject<UNavData>(this);
 
 			worldPos = targets[i]->GetActorLocation();
 			bool behind = DeprojectWorldToScreen(pc, worldPos, screenPos, false);
@@ -81,6 +93,8 @@ TArray<UNavData*> UNavigationComponent::GetAllNavDatas()
 			data->behind = behind;
 			data->distance = dir.Length();
 			data->angle = 0;
+
+			data->GetPosOnScreen();
 
 			datas.Add(data);
 		}

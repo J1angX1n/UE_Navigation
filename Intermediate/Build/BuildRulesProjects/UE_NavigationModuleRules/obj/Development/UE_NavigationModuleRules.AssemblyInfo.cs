@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UE_NavigationModuleRules")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Development")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3d721fa267b3fd98bb2481a4d84de6e4d469564d")]
 [assembly: System.Reflection.AssemblyProductAttribute("UE_NavigationModuleRules")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UE_NavigationModuleRules")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -10,7 +10,18 @@ public class UE_Navigation : ModuleRules
 
         OptimizeCode = CodeOptimization.Never;
 
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
+        PublicDependencyModuleNames.AddRange(new string[] 
+		{ 
+			"Core", 
+			"CoreUObject", 
+			"Engine", 
+			"InputCore", 
+			"EnhancedInput",
+			"UMG",
+			"UMGEditor",
+            "BlueprintGraph",
+
+        });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

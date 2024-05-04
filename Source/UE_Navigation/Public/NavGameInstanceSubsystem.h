@@ -34,4 +34,6 @@ public:
 protected:
 	//存储指引目标
 	TArray<AActor*> targets;
+
+
 };

@@ -1,8 +1,8 @@
 "D:\Backup\Documents\Unreal Projects\UE_Navigation\Intermediate\Build\Win64\UnrealEditor\Inc\UE_Navigation\UHT\NavData.gen.cpp"
-/FI"..\Intermediate\Build\Win64\x64\UnrealEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
+/FI"..\Intermediate\Build\Win64\x64\UnrealEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.NonOptimized.ValApi.Cpp20.h"
 /FI"D:\Backup\Documents\Unreal Projects\UE_Navigation\Intermediate\Build\Win64\x64\UnrealEditor\Development\UE_Navigation\Definitions.UE_Navigation.h"
-/Yu"..\Intermediate\Build\Win64\x64\UnrealEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
-/Fp"..\Intermediate\Build\Win64\x64\UnrealEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.pch"
+/Yu"..\Intermediate\Build\Win64\x64\UnrealEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.NonOptimized.ValApi.Cpp20.h"
+/Fp"..\Intermediate\Build\Win64\x64\UnrealEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.NonOptimized.ValApi.Cpp20.h.pch"
 /Fo"D:\Backup\Documents\Unreal Projects\UE_Navigation\Intermediate\Build\Win64\x64\UnrealEditor\Development\UE_Navigation\NavData.gen.cpp.obj"
 /sourceDependencies "D:\Backup\Documents\Unreal Projects\UE_Navigation\Intermediate\Build\Win64\x64\UnrealEditor\Development\UE_Navigation\NavData.gen.cpp.dep.json"
 @"D:\Backup\Documents\Unreal Projects\UE_Navigation\Intermediate\Build\Win64\x64\UnrealEditor\Development\UE_Navigation\UE_Navigation.Shared.rsp"
@@ -25,9 +25,7 @@
 /D_DISABLE_EXTENDED_ALIGNED_STORAGE
 /Ob2
 /d2ExtendedWarningInfo
-/Ox
-/Ot
-/GF
+/Od
 /errorReport:prompt
 /EHsc
 /DPLATFORM_EXCEPTIONS_DISABLED=0
@@ -35,7 +33,6 @@
 /MD
 /bigobj
 /fp:fast
-/Zo
 /Zp8
 /we4456
 /we4458

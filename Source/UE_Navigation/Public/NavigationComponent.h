@@ -7,6 +7,7 @@
 #include "Containers/Array.h"
 #include "UObject/Object.h"
 #include "NavData.h"
+#include "Blueprint/UserWidget.h"
 
 #include "NavigationComponent.generated.h"
 
@@ -42,5 +43,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NavComponent")
 	bool show;
 
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NavComponent")
+	UUserWidget* widgetWithin;
 };
