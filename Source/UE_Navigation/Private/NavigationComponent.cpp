@@ -33,10 +33,7 @@ void UNavigationComponent::BeginPlay()
 void UNavigationComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-
-
-
+	
 	// ...
 }
 
@@ -56,13 +53,12 @@ TArray<UNavData*> UNavigationComponent::GetAllNavDatas()
 
 	UWorld* world = GetWorld();
 	FVector worldPos, selfPos;
-	FVector2D screenPos;
+	FVector2D screenPos, screenSize;
 
 	double UIHalfWidth = 0, UIHalfHeight = 0;
 
 	if (world)
 	{
-		APlayerController* pc = UGameplayStatics::GetPlayerController(world, 0);
 		UGameInstance* ins = UGameplayStatics::GetGameInstance(world);
 		UNavGameInstanceSubsystem* sys = ins->GetSubsystem<UNavGameInstanceSubsystem>();
 
@@ -72,6 +68,9 @@ TArray<UNavData*> UNavigationComponent::GetAllNavDatas()
 		AActor* owner = GetOwner();
 		selfPos = owner->GetActorLocation();
 
+		world->GetGameViewport()->GetViewportSize(screenSize);
+		double screenWidth = screenSize.X, screenHeight = screenSize.Y;
+
 		if (widgetWithin)
 		{
 			UIHalfWidth = widgetWithin->GetDesiredSize().X;
@@ -80,51 +79,34 @@ TArray<UNavData*> UNavigationComponent::GetAllNavDatas()
 
 		for (size_t i = 0; i < len; i++)
 		{
-			UNavData* data = NewObject<UNavData>(this);
-
 			worldPos = targets[i]->GetActorLocation();
-			bool behind = DeprojectWorldToScreen(pc, worldPos, screenPos, false);
+
+			//¿¼ÂÇ¶¯Ì¬ÒÆ³ýµÄÇé¿ö
+			UNavigationTargetComponent* targetCom = targets[i]->GetComponentByClass<UNavigationTargetComponent>();
+
+			targetCom->UpdateScreenPosition();
+			targetCom->GetPosOnScreen(UIHalfWidth, UIHalfHeight);
+
+			UNavData* data = targetCom->GetNavData();
+
+			if (data->behind)
+			{
+				data->realPos.X = screenWidth - data->realPos.X;
+				data->realPos.Y = screenHeight - data->realPos.Y;
+
+				if (data->realPos.X > 0 && data->realPos.X < screenWidth)
+				{
+					data->realPos.Y = screenHeight;
+				}
+			}
 
 			//¼ÆËã¾àÀë
 			FVector dir = worldPos - selfPos;
-
-			data->pos_x = screenPos.X;
-			data->pos_y = screenPos.Y;
-			data->behind = behind;
 			data->distance = dir.Length();
-			data->angle = 0;
-
-			data->GetPosOnScreen();
 
 			datas.Add(data);
 		}
 	}
 
 	return datas;
-}
-
-bool UNavigationComponent::DeprojectWorldToScreen(APlayerController const* Player, const FVector& WorldPosition, FVector2D& ScreenPosition, bool bPlayerViewportRelative)
-{
-	ULocalPlayer* const LP = Player ? Player->GetLocalPlayer() : nullptr;
-	if (LP && LP->ViewportClient)
-	{
-		// get the projection data
-		FSceneViewProjectionData ProjectionData;
-		if (LP->GetProjectionData(LP->ViewportClient->Viewport, /*out*/ ProjectionData))
-		{
-			FMatrix const ViewProjectionMatrix = ProjectionData.ComputeViewProjectionMatrix();
-			bool bResult = FSceneView::ProjectWorldToScreen(WorldPosition, ProjectionData.GetConstrainedViewRect(), ViewProjectionMatrix, ScreenPosition);
-
-			if (bPlayerViewportRelative)
-			{
-				ScreenPosition -= FVector2D(ProjectionData.GetConstrainedViewRect().Min);
-			}
-
-			bResult = bResult && Player->PostProcessWorldToScreen(WorldPosition, ScreenPosition, bPlayerViewportRelative);
-			return bResult;
-		}
-	}
-
-	ScreenPosition = FVector2D::ZeroVector;
-	return false;
 }

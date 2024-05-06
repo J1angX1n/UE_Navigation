@@ -5,7 +5,7 @@
         "ProvidedModule": "",
         "Includes": [
             "d:\\backup\\documents\\unreal projects\\ue_navigation\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\ue_navigation\\definitions.ue_navigation.h",
-            "e:\\unrealengine\\engine\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\unrealed\\shareddefinitions.unrealed.project.valapi.cpp20.h",
+            "e:\\unrealengine\\engine\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\unrealed\\shareddefinitions.unrealed.project.nonoptimized.valapi.cpp20.h",
             "d:\\backup\\documents\\unreal projects\\ue_navigation\\source\\ue_navigation\\public\\navigationtargetcomponent.h",
             "e:\\unrealengine\\engine\\source\\runtime\\core\\public\\coreminimal.h",
             "e:\\unrealengine\\engine\\source\\runtime\\core\\public\\coretypes.h",

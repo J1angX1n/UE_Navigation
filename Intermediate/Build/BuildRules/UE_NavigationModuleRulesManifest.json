@@ -1,8 +1,8 @@
 {
 	"SourceFiles": [
-		"F:\\UE Projects\\UE_Navigation\\Source\\UE_Navigation\\UE_Navigation.Build.cs",
-		"F:\\UE Projects\\UE_Navigation\\Source\\UE_Navigation.Target.cs",
-		"F:\\UE Projects\\UE_Navigation\\Source\\UE_NavigationEditor.Target.cs"
+		"D:\\Backup\\Documents\\Unreal Projects\\UE_Navigation\\Source\\UE_Navigation\\UE_Navigation.Build.cs",
+		"D:\\Backup\\Documents\\Unreal Projects\\UE_Navigation\\Source\\UE_Navigation.Target.cs",
+		"D:\\Backup\\Documents\\Unreal Projects\\UE_Navigation\\Source\\UE_NavigationEditor.Target.cs"
 	],
 	"EngineVersion": "5.4.0"
 }

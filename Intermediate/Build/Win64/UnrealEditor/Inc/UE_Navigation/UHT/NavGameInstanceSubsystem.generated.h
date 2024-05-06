@@ -15,13 +15,13 @@ class AActor;
 #endif
 #define UE_NAVIGATION_NavGameInstanceSubsystem_generated_h
 
-#define FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execGetTargetNum); \
 	DECLARE_FUNCTION(execAddTarget); \
 	DECLARE_FUNCTION(execGetTargets);
 
 
-#define FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_19_INCLASS_NO_PURE_DECLS \
+#define FID_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_19_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUNavGameInstanceSubsystem(); \
 	friend struct Z_Construct_UClass_UNavGameInstanceSubsystem_Statics; \
@@ -30,7 +30,7 @@ public: \
 	DECLARE_SERIALIZER(UNavGameInstanceSubsystem)
 
 
-#define FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_19_ENHANCED_CONSTRUCTORS \
+#define FID_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_19_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	UNavGameInstanceSubsystem(UNavGameInstanceSubsystem&&); \
@@ -41,13 +41,13 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(UNavGameInstanceSubsystem)
 
 
-#define FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_16_PROLOG
-#define FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_19_GENERATED_BODY \
+#define FID_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_16_PROLOG
+#define FID_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_19_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_19_INCLASS_NO_PURE_DECLS \
-	FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_19_ENHANCED_CONSTRUCTORS \
+	FID_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_19_INCLASS_NO_PURE_DECLS \
+	FID_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h_19_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -55,7 +55,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> UE_NAVIGATION_API UClass* StaticClass<class UNavGameInstanceSubsystem>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h
+#define CURRENT_FILE_ID FID_UE_Navigation_Source_UE_Navigation_Public_NavGameInstanceSubsystem_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

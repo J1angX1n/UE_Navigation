@@ -157,14 +157,14 @@ UNavigationComponent::~UNavigationComponent() {}
 // End Class UNavigationComponent
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavigationComponent_h_Statics
+struct Z_CompiledInDeferFile_FID_UE_Navigation_Source_UE_Navigation_Public_NavigationComponent_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
 		{ Z_Construct_UClass_UNavigationComponent, UNavigationComponent::StaticClass, TEXT("UNavigationComponent"), &Z_Registration_Info_UClass_UNavigationComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNavigationComponent), 2184665878U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavigationComponent_h_2991895965(TEXT("/Script/UE_Navigation"),
-	Z_CompiledInDeferFile_FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavigationComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_UE_Projects_UE_Navigation_Source_UE_Navigation_Public_NavigationComponent_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_UE_Navigation_Source_UE_Navigation_Public_NavigationComponent_h_2991895965(TEXT("/Script/UE_Navigation"),
+	Z_CompiledInDeferFile_FID_UE_Navigation_Source_UE_Navigation_Public_NavigationComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_UE_Navigation_Source_UE_Navigation_Public_NavigationComponent_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

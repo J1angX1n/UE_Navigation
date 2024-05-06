@@ -36,8 +36,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	TArray<UNavData*> GetAllNavDatas();
 
-	bool DeprojectWorldToScreen(APlayerController const* Player, const FVector& WorldPosition, FVector2D& ScreenPosition, bool bPlayerViewportRelative);
-
 protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NavComponent")
