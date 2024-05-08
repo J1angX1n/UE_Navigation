@@ -9,7 +9,7 @@ UNavData::UNavData()
 	angle = 0;
 	distance = 0;
 
-	realPos = FVector2D(pos_x, pos_y);
+	realPos = FVector2D(0, 0);
 
 	behind = false;
 }

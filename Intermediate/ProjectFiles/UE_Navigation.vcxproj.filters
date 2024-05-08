@@ -71,4 +71,9 @@
       <Filter>Source\UE_Navigation\Public</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\UE_Navigation\Public\NavMacros.h">
+      <Filter>Source\UE_Navigation\Public</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

@@ -81,28 +81,36 @@ TArray<UNavData*> UNavigationComponent::GetAllNavDatas()
 		{
 			worldPos = targets[i]->GetActorLocation();
 
-			//考虑动态移除的情况
+			//TODO 考虑动态移除的情况
 			UNavigationTargetComponent* targetCom = targets[i]->GetComponentByClass<UNavigationTargetComponent>();
 
+			//计算三维坐标映射到二维后的坐标
 			targetCom->UpdateScreenPosition();
+			//计算二维坐标实际在屏幕上显示的位置
 			targetCom->GetPosOnScreen(UIHalfWidth, UIHalfHeight);
 
 			UNavData* data = targetCom->GetNavData();
 
-			if (data->behind)
-			{
-				data->realPos.X = screenWidth - data->realPos.X;
-				data->realPos.Y = screenHeight - data->realPos.Y;
+			//if (data->behind)
+			//{
+			//	if (abs(data->realPos.X - 0) <= 1e-6)
+			//	{
+			//		data->realPos.Y = fmax(data->realPos.Y, screenHeight - abs(data->pos_x));
+			//	}
+			//	else if (abs(data->realPos.X - screenWidth) <= 1e-6)
+			//	{
+			//		data->realPos.Y = fmax(data->realPos.Y, screenHeight - abs(screenWidth - data->pos_x));
+			//	}
+			//	else
+			//	{
+			//		data->realPos.Y = screenHeight;
+			//	}
 
-				if (data->realPos.X > 0 && data->realPos.X < screenWidth)
-				{
-					data->realPos.Y = screenHeight;
-				}
-			}
+			//}
 
 			//计算距离
 			FVector dir = worldPos - selfPos;
-			data->distance = dir.Length();
+			data->distance = dir.Length() - targetCom->GetDiff();
 
 			datas.Add(data);
 		}

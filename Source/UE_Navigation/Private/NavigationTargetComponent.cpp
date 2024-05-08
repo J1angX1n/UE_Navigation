@@ -9,6 +9,7 @@
 #include "GameFramework/Actor.h"
 #include "NavData.h"
 #include "GameFramework/PlayerController.h"
+#include "NavMacros.h"
 
 // Sets default values for this component's properties
 UNavigationTargetComponent::UNavigationTargetComponent()
@@ -18,6 +19,7 @@ UNavigationTargetComponent::UNavigationTargetComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	m_NavData = NULL;
+	Diff = 0.0;
 
 	// ...
 }
@@ -80,7 +82,7 @@ void UNavigationTargetComponent::UpdateScreenPosition()
 {
 	UWorld* world = GetWorld();
 	FVector worldPos;
-	FVector2D screenPos;
+	FVector2D screenPos, screenSize;
 
 	APlayerController* pc = UGameplayStatics::GetPlayerController(world, 0);
 
@@ -89,13 +91,27 @@ void UNavigationTargetComponent::UpdateScreenPosition()
 		worldPos = GetOwner()->GetActorLocation();
 		bool behind = !DeprojectWorldToScreen(pc, worldPos, screenPos, false);
 
+		world->GetGameViewport()->GetViewportSize(screenSize);
+		double screenWidth = screenSize.X, screenHeight = screenSize.Y;
+
 		if (!m_NavData)
 		{
 			m_NavData = NewObject<UNavData>(/*this*/);
 		}
 		
-		m_NavData->pos_x = screenPos.X;
-		m_NavData->pos_y = screenPos.Y;
+		if (behind)
+		{
+			m_NavData->pos_x = screenWidth - screenPos.X;
+
+			//取二者较大值可以防止绝大部分情况下坐标出现跳变
+			m_NavData->pos_y = fmax(screenPos.Y, screenHeight - screenPos.Y);
+		}
+		else
+		{
+			m_NavData->pos_x = screenPos.X;
+			m_NavData->pos_y = screenPos.Y;
+		}
+		
 		m_NavData->behind = behind;
 		m_NavData->angle = 0;
 	}
@@ -113,7 +129,7 @@ bool UNavigationTargetComponent::ProjectWorldToScreen(const FVector& WorldPositi
 	}
 	else if (Result.W == 0)
 	{
-		Result.W = 1e-6;
+		Result.W = -1e-6;
 	}
 
 	// Tweak our W value to allow the outside view position calcs if the variable is enabled.
@@ -184,37 +200,64 @@ void UNavigationTargetComponent::GetPosOnScreen(double UIHalfWidth, double UIHal
 	double screenWidth = screenSize.X, screenHeight = screenSize.Y;
 	double screenHalfWidth = screenSize.X / 2;
 	double screenHalfHeight = screenSize.Y / 2;
+	bool outsideScreen = true;
 
+	// TODO 即使是上方与左侧位置也需要修正，给出的点应当是图片正中心的点
 	FVector2D center(screenHalfWidth, screenHalfHeight);
+	FVector2D prePos = m_NavData->realPos;
 	m_NavData->realPos = FVector2D(m_NavData->pos_x, m_NavData->pos_y);
 	if (m_NavData->pos_x >= 0 && m_NavData->pos_x <= screenHalfWidth * 2 && m_NavData->pos_y >= 0 && m_NavData->pos_y <= screenHalfHeight * 2)
 	{
-		return;
+		//在屏幕中
+		outsideScreen = false;
 	}
-
-	// TODO 即使是上方与左侧位置也需要修正，给出的点应当是图片正中心的点
-	//上方
-	if (GetIntersectedPoint(center, originPos, FVector2D(0, 0), FVector2D(screenWidth, 0), m_NavData->realPos))
+	else if (GetIntersectedPoint(center, originPos, FVector2D(0, 0), FVector2D(screenWidth, 0), m_NavData->realPos))
 	{
-		return;
+		//上方
 	}
-
-	//左侧
-	if (GetIntersectedPoint(center, originPos, FVector2D(0, 0), FVector2D(0, screenHeight), m_NavData->realPos))
+	else if (GetIntersectedPoint(center, originPos, FVector2D(0, 0), FVector2D(0, screenHeight), m_NavData->realPos))
 	{
-		return;
+		//左侧
 	}
-
-	//右侧
-	if (GetIntersectedPoint(center, originPos, FVector2D(screenWidth, 0), FVector2D(screenWidth, screenHeight), m_NavData->realPos))
+	else if (GetIntersectedPoint(center, originPos, FVector2D(screenWidth, 0), FVector2D(screenWidth, screenHeight), m_NavData->realPos))
 	{
 		m_NavData->realPos -= FVector2D(2 * UIHalfWidth, 0);
-		return;
+		//右侧
+	}
+	else
+	{
+		//下方
+		GetIntersectedPoint(center, originPos, FVector2D(0, screenHeight), FVector2D(screenWidth, screenHeight), m_NavData->realPos);
+		m_NavData->realPos -= FVector2D(0, 2 * UIHalfHeight);
 	}
 
-	//下方
-	GetIntersectedPoint(center, originPos, FVector2D(0, screenHeight), FVector2D(screenWidth, screenHeight), m_NavData->realPos);
-	m_NavData->realPos -= FVector2D(0, 2 * UIHalfHeight);
+	//修正坐标让过渡更平滑
+	if (m_NavData->behind)
+	{
+		if (abs(m_NavData->realPos.X - 0) <= 1e-6)
+		{
+			m_NavData->realPos.Y = fmax(m_NavData->realPos.Y, screenHeight - abs(m_NavData->pos_x));
+		}
+		else if (abs(m_NavData->realPos.X - screenWidth) <= 1e-6)
+		{
+			m_NavData->realPos.Y = fmax(m_NavData->realPos.Y, screenHeight - abs(screenWidth - m_NavData->pos_x));
+		}
+		else
+		{
+			m_NavData->realPos.Y = screenHeight;
+		}
+	}
+
+	//如果计算出的新的坐标相比于上个坐标出现了跳变就限制新坐标变化使其慢慢过渡
+	if (outsideScreen && prePos != FVector2D::ZeroVector)
+	{
+		FVector2D dir = m_NavData->realPos - prePos;
+
+		if (dir.Length() >= DelayRangeMin && dir.Length() <= DelayRangeMax)
+		{
+			m_NavData->realPos = DelayCoefficient * dir + prePos;
+		}
+	}
 }
 
 UNavData* UNavigationTargetComponent::GetNavData()

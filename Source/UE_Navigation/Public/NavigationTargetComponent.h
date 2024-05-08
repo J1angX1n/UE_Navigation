@@ -42,8 +42,12 @@ public:
 
 	UNavData* GetNavData();
 
+	void SetDiff(double value) { Diff = value; }
+	double GetDiff() { return Diff; }
 
 protected:
 	UNavData* m_NavData;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NavTarget")
+	double Diff;
 };
