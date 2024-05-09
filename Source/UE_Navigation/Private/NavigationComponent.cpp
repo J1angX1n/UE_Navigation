@@ -6,7 +6,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/PlayerController.h"
 #include "NavigationTargetComponent.h"
-
+#include "Components/TextBlock.h"
 
 
 // Sets default values for this component's properties
@@ -58,6 +58,10 @@ bool UNavigationComponent::UpdateNavigation()
 		UGameInstance* ins = UGameplayStatics::GetGameInstance(world);
 		UNavGameInstanceSubsystem* sys = ins->GetSubsystem<UNavGameInstanceSubsystem>();
 
+		FVector2D screenSize;
+		world->GetGameViewport()->GetViewportSize(screenSize);
+		double screenWidth = screenSize.X, screenHeight = screenSize.Y;
+
 		int16 num = sys->GetTargetNum();
 
 		//保持屏幕上的指示图标数量与NavigationTargetComponent实例数量一致
@@ -82,7 +86,36 @@ bool UNavigationComponent::UpdateNavigation()
 			UNavData* data = NavDatas[i];
 			FVector2D UISize = instance->GetDesiredSize();
 
-			instance->SetPositionInViewport(data->realPos - UISize / 2);
+			//计算得到的真实位置是图片渲染的左上角，需要减去UI大小的一半将其居中
+			FVector2D diff = UISize / 2;
+
+			//真实位置处于屏幕边界时要稍微调整图片位置使其能完整显示，不能直接修改realPos的值，那样位置会发生变化
+			bool outside = false;
+			if (data->realPos.X < UISize.X / 2)
+			{
+				diff.X -= UISize.X / 2 - data->realPos.X;
+				outside = true;
+			}
+			if (data->realPos.Y < UISize.Y / 2)
+			{
+				diff.Y -= UISize.Y / 2 - data->realPos.Y;
+				outside = true;
+			}
+
+			if (data->realPos.X > screenWidth - UISize.X / 2)
+			{
+				diff.X += UISize.X / 2 - (screenWidth - data->realPos.X);
+				outside = true;
+			}
+			if (data->realPos.Y > screenHeight - UISize.Y / 2)
+			{
+				diff.Y += UISize.Y / 2 - (screenHeight - data->realPos.Y);
+				outside = true;
+			}
+			
+			UTextBlock* textDistance = Cast<UTextBlock>(instance->GetWidgetFromName(TEXT("TextDistance")));
+			textDistance->SetText(FText::AsNumber(data->distance));
+			instance->SetPositionInViewport(data->realPos - diff);
 		}
 		
 		return true;

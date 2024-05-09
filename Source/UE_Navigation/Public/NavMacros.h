@@ -3,7 +3,7 @@
 //如果位置发生了距离在min到max大小范围内的突变就限制其变化，系数为DelayCoefficient，系数越小变化就越平缓
 #define DelayRangeMin 50.0
 #define DelayRangeMax 500.0
-#define DelayCoefficient 0.09
+#define DelayCoefficient 0.085
 
 //浮点0
 #define FZero 1e-6
