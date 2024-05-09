@@ -3,3 +3,5 @@ Binaries/
 Intermediate/
 Saved/
 DerivedDataCache/
+.vsconfig
+*.sln
