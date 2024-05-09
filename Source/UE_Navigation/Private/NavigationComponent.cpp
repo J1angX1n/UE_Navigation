@@ -114,7 +114,11 @@ bool UNavigationComponent::UpdateNavigation()
 			}
 			
 			UTextBlock* textDistance = Cast<UTextBlock>(instance->GetWidgetFromName(TEXT("TextDistance")));
-			textDistance->SetText(FText::AsNumber(data->distance));
+			if (textDistance)
+			{
+				textDistance->SetText(FText::AsNumber(data->distance));
+			}
+			
 			instance->SetPositionInViewport(data->realPos - diff);
 		}
 		
