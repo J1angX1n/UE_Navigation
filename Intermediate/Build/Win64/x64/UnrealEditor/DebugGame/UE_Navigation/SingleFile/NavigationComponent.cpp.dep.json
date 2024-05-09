@@ -935,7 +935,8 @@
             "e:\\unrealengine\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gameplaystaticstypes.generated.h",
             "e:\\unrealengine\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gameplaystatics.generated.h",
             "d:\\backup\\documents\\unreal projects\\ue_navigation\\source\\ue_navigation\\public\\navigationtargetcomponent.h",
-            "d:\\backup\\documents\\unreal projects\\ue_navigation\\intermediate\\build\\win64\\unrealeditor\\inc\\ue_navigation\\uht\\navigationtargetcomponent.generated.h"
+            "d:\\backup\\documents\\unreal projects\\ue_navigation\\intermediate\\build\\win64\\unrealeditor\\inc\\ue_navigation\\uht\\navigationtargetcomponent.generated.h",
+            "d:\\backup\\documents\\unreal projects\\ue_navigation\\source\\ue_navigation\\public\\navmacros.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

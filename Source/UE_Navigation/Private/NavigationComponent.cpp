@@ -18,6 +18,7 @@ UNavigationComponent::UNavigationComponent()
 
 	show = false;
 	widgetWithin = NULL;
+	widgetOutside = NULL;
 }
 
 
@@ -34,7 +35,60 @@ void UNavigationComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	
-	// ...
+	UpdateNavigation();
+}
+
+bool UNavigationComponent::UpdateNavigation()
+{
+	if (!widgetWithin)
+	{
+		return false;
+	}
+
+	//没有设置屏幕外指示图标的话就用屏幕内的代替之
+	if (!widgetOutside)
+	{
+		widgetOutside = widgetWithin;
+	}
+
+	UWorld* world = GetWorld();
+
+	if (world)
+	{
+		UGameInstance* ins = UGameplayStatics::GetGameInstance(world);
+		UNavGameInstanceSubsystem* sys = ins->GetSubsystem<UNavGameInstanceSubsystem>();
+
+		int16 num = sys->GetTargetNum();
+
+		//保持屏幕上的指示图标数量与NavigationTargetComponent实例数量一致
+		while (m_NavWidgets.Num() > num)
+		{
+			m_NavWidgets[0]->RemoveFromParent();
+			m_NavWidgets.Pop();
+		}
+
+		while (m_NavWidgets.Num() < num)
+		{
+			UUserWidget* instance = CreateWidget<UUserWidget>(world, widgetWithin);
+			instance->AddToViewport();
+			m_NavWidgets.Add(instance);
+		}
+
+		TArray<UNavData*> NavDatas = GetAllNavDatas();
+
+		for (uint16 i = 0; i < num; i++)
+		{
+			UUserWidget* instance = m_NavWidgets[i];
+			UNavData* data = NavDatas[i];
+			FVector2D UISize = instance->GetDesiredSize();
+
+			instance->SetPositionInViewport(data->realPos - UISize / 2);
+		}
+		
+		return true;
+	}
+	
+	return false;
 }
 
 bool UNavigationComponent::GetShow()
@@ -71,11 +125,11 @@ TArray<UNavData*> UNavigationComponent::GetAllNavDatas()
 		world->GetGameViewport()->GetViewportSize(screenSize);
 		double screenWidth = screenSize.X, screenHeight = screenSize.Y;
 
-		if (widgetWithin)
-		{
-			UIHalfWidth = widgetWithin->GetDesiredSize().X;
-			UIHalfHeight = widgetWithin->GetDesiredSize().Y;
-		}
+		//if (widgetWithin)
+		//{
+		//	UIHalfWidth = widgetWithin->GetDesiredSize().X;
+		//	UIHalfHeight = widgetWithin->GetDesiredSize().Y;
+		//}
 
 		for (size_t i = 0; i < len; i++)
 		{
@@ -87,26 +141,9 @@ TArray<UNavData*> UNavigationComponent::GetAllNavDatas()
 			//计算三维坐标映射到二维后的坐标
 			targetCom->UpdateScreenPosition();
 			//计算二维坐标实际在屏幕上显示的位置
-			targetCom->GetPosOnScreen(UIHalfWidth, UIHalfHeight);
+			targetCom->GetPosOnScreen(0, 0);
 
 			UNavData* data = targetCom->GetNavData();
-
-			//if (data->behind)
-			//{
-			//	if (abs(data->realPos.X - 0) <= 1e-6)
-			//	{
-			//		data->realPos.Y = fmax(data->realPos.Y, screenHeight - abs(data->pos_x));
-			//	}
-			//	else if (abs(data->realPos.X - screenWidth) <= 1e-6)
-			//	{
-			//		data->realPos.Y = fmax(data->realPos.Y, screenHeight - abs(screenWidth - data->pos_x));
-			//	}
-			//	else
-			//	{
-			//		data->realPos.Y = screenHeight;
-			//	}
-
-			//}
 
 			//计算距离
 			FVector dir = worldPos - selfPos;

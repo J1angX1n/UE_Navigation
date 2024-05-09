@@ -10,6 +10,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeNavigationComponent() {}
 
 // Begin Cross Module References
+COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 ENGINE_API UClass* Z_Construct_UClass_UActorComponent();
 UE_NAVIGATION_API UClass* Z_Construct_UClass_UNavData_NoRegister();
 UE_NAVIGATION_API UClass* Z_Construct_UClass_UNavigationComponent();
@@ -91,13 +92,17 @@ struct Z_Construct_UClass_UNavigationComponent_Statics
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_widgetWithin_MetaData[] = {
 		{ "Category", "NavComponent" },
-		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/NavigationComponent.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_widgetOutside_MetaData[] = {
+		{ "Category", "NavComponent" },
 		{ "ModuleRelativePath", "Public/NavigationComponent.h" },
 	};
 #endif // WITH_METADATA
 	static void NewProp_show_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_show;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_widgetWithin;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_widgetWithin;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_widgetOutside;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
@@ -114,10 +119,12 @@ void Z_Construct_UClass_UNavigationComponent_Statics::NewProp_show_SetBit(void* 
 	((UNavigationComponent*)Obj)->show = 1;
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UNavigationComponent_Statics::NewProp_show = { "show", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UNavigationComponent), &Z_Construct_UClass_UNavigationComponent_Statics::NewProp_show_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_show_MetaData), NewProp_show_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UNavigationComponent_Statics::NewProp_widgetWithin = { "widgetWithin", nullptr, (EPropertyFlags)0x002008000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UNavigationComponent, widgetWithin), Z_Construct_UClass_UUserWidget_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_widgetWithin_MetaData), NewProp_widgetWithin_MetaData) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UNavigationComponent_Statics::NewProp_widgetWithin = { "widgetWithin", nullptr, (EPropertyFlags)0x0024080000000005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UNavigationComponent, widgetWithin), Z_Construct_UClass_UClass, Z_Construct_UClass_UUserWidget_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_widgetWithin_MetaData), NewProp_widgetWithin_MetaData) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UNavigationComponent_Statics::NewProp_widgetOutside = { "widgetOutside", nullptr, (EPropertyFlags)0x0024080000000005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UNavigationComponent, widgetOutside), Z_Construct_UClass_UClass, Z_Construct_UClass_UUserWidget_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_widgetOutside_MetaData), NewProp_widgetOutside_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UNavigationComponent_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNavigationComponent_Statics::NewProp_show,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNavigationComponent_Statics::NewProp_widgetWithin,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNavigationComponent_Statics::NewProp_widgetOutside,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UNavigationComponent_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_UNavigationComponent_Statics::DependentSingletons[])() = {
@@ -160,10 +167,10 @@ UNavigationComponent::~UNavigationComponent() {}
 struct Z_CompiledInDeferFile_FID_UE_Navigation_Source_UE_Navigation_Public_NavigationComponent_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UNavigationComponent, UNavigationComponent::StaticClass, TEXT("UNavigationComponent"), &Z_Registration_Info_UClass_UNavigationComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNavigationComponent), 2184665878U) },
+		{ Z_Construct_UClass_UNavigationComponent, UNavigationComponent::StaticClass, TEXT("UNavigationComponent"), &Z_Registration_Info_UClass_UNavigationComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNavigationComponent), 1844957451U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_UE_Navigation_Source_UE_Navigation_Public_NavigationComponent_h_2991895965(TEXT("/Script/UE_Navigation"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_UE_Navigation_Source_UE_Navigation_Public_NavigationComponent_h_607646225(TEXT("/Script/UE_Navigation"),
 	Z_CompiledInDeferFile_FID_UE_Navigation_Source_UE_Navigation_Public_NavigationComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_UE_Navigation_Source_UE_Navigation_Public_NavigationComponent_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

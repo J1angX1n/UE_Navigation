@@ -30,6 +30,8 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	bool UpdateNavigation();
+
 	bool GetShow();
 	void SetShow(bool value);
 
@@ -38,9 +40,14 @@ public:
 
 protected:
 
+	TArray<UUserWidget*> m_NavWidgets;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NavComponent")
 	bool show;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NavComponent")
-	UUserWidget* widgetWithin;
+	TSubclassOf<UUserWidget> widgetWithin;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NavComponent")
+	TSubclassOf<UUserWidget> widgetOutside;
 };
