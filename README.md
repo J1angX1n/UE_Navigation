@@ -26,7 +26,7 @@
 
 ![](https://github.com/J1angX1n/UE_Navigation/blob/master/Images/img3.png)
 
-给NavigationTarget设置上
+修改NavigationTarget属性将两个UI设置上
 
 ![](https://github.com/J1angX1n/UE_Navigation/blob/master/Images/img4.png)
 
