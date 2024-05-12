@@ -14,22 +14,22 @@
 
 编译后给使用的人物添加Navigation组件
 
-![](https://github.com/J1angX1n/UE_Navigation/blob/master/Images/img1.gif)
+![](https://github.com/J1angX1n/UE_Navigation/blob/master/Images/img1.png)
 
 给指示目标添加NavigationTarget组件
 
-![](https://github.com/J1angX1n/UE_Navigation/blob/master/Images/img2.gif)
+![](https://github.com/J1angX1n/UE_Navigation/blob/master/Images/img2.png)
 
 
 
 创建两个UI，一个用来指示屏幕内情况一个指示屏幕外（屏幕外的UI箭头向上)
 
-![](https://github.com/J1angX1n/UE_Navigation/blob/master/Images/img3.gif)
+![](https://github.com/J1angX1n/UE_Navigation/blob/master/Images/img3.png)
 
 给NavigationTarget设置上
 
-![](https://github.com/J1angX1n/UE_Navigation/blob/master/Images/img4.gif)
+![](https://github.com/J1angX1n/UE_Navigation/blob/master/Images/img4.png)
 
 启动
 
-![](https://github.com/J1angX1n/UE_Navigation/blob/master/Images/img5.gif)
+![](https://github.com/J1angX1n/UE_Navigation/blob/master/Images/img5.png)
