@@ -33,5 +33,8 @@ public:
 	bool behind;
 
 	UPROPERTY(BluePrintReadOnly)
+	bool outsideScreen;
+
+	UPROPERTY(BluePrintReadOnly)
 	FVector2D realPos;
 };

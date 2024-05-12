@@ -11,6 +11,7 @@ UNavData::UNavData()
 
 	realPos = FVector2D(0, 0);
 
+	outsideScreen = false;
 	behind = false;
 }
 
