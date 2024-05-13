@@ -148,7 +148,7 @@ void UNavigationTargetComponent::ShowInside()
 	UTextBlock* textDistance = Cast<UTextBlock>(WidgetInside->GetWidgetFromName(TEXT(LabelDistance)));
 	if (textDistance)
 	{
-		textDistance->SetText(FText::AsNumber(m_NavData->distance - Diff));
+		textDistance->SetText(FText::AsNumber(fmax(0, m_NavData->distance - Diff)));
 	}
 }
 
@@ -253,7 +253,7 @@ void UNavigationTargetComponent::ShowOutside()
 	UTextBlock* textDistance = Cast<UTextBlock>(WidgetOutside->GetWidgetFromName(TEXT(LabelDistance)));
 	if (textDistance)
 	{
-		textDistance->SetText(FText::AsNumber(m_NavData->distance - Diff));
+		textDistance->SetText(FText::AsNumber(fmax(0, m_NavData->distance - Diff)));
 	}
 }
 
