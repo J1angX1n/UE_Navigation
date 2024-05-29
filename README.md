@@ -1,4 +1,6 @@
-效果：
+插件版本：https://github.com/J1angX1n/UE_Navigation_Plugin
+
+效果(gif加载比较慢)：
 
 指示图标在屏幕内
 
