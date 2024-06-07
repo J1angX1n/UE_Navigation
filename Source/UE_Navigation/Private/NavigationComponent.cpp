@@ -7,6 +7,7 @@
 #include "GameFramework/PlayerController.h"
 #include "NavigationTargetComponent.h"
 #include "Components/TextBlock.h"
+#include "Engine/GameViewportClient.h"
 
 
 // Sets default values for this component's properties

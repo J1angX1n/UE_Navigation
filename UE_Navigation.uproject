@@ -21,6 +21,11 @@
 			"TargetAllowList": [
 				"Editor"
 			]
+		},
+		{
+			"Name": "LGUI",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/92c868e93e1d4dd596f87b200102f0cf"
 		}
 	]
 }

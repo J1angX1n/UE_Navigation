@@ -1,0 +1,53 @@
+﻿// Copyright 2019-Present LexLiu. All Rights Reserved.
+#include "LGUIPostProcessVertexShader.usf"
+#include "/Engine/Private/GammaCorrectionCommon.ush"
+
+Texture2D _MainTex;
+SamplerState _MainTexSampler;
+
+// reference from CompositeUIPixelShader.usf
+float3 LinearizeColor(float3 EncodedColor)
+{
+#if MAC
+		// Note, MacOSX native output is raw gamma 2.2 not sRGB!
+		return pow(EncodedColor, 2.2);
+#else
+#if USE_709
+			// Didn't profile yet if the branching version would be faster (different linear segment).
+			return Rec709ToLinear(EncodedColor);
+#else
+    return sRGBToLinear(EncodedColor);
+#endif
+#endif
+}
+
+void SimpleCopyTargetPS(
+    SimpleVSToPS input,
+    out float4 OutColor : SV_Target0
+)
+{
+    OutColor = _MainTex.Sample(_MainTexSampler, input.uv);
+#if LGUI_COLORCORRECT
+    OutColor.rgb = LinearizeColor(OutColor.rgb);
+#endif
+}
+
+
+float4 _MainTextureScaleOffset;
+float4x4 _MVP;
+
+void CopyMeshRegionPS(
+    CopyMeshRegionVSToPS input,
+    out float4 OutColor : SV_Target0
+)
+{
+    float4 clipSpacePos = mul(float4(input.localPosition.xyz, 1.0), _MVP);
+    float inv_W = 1.0f / clipSpacePos.w;
+    float2 uv = float2(clipSpacePos.x * inv_W, clipSpacePos.y * inv_W) * 0.5f + float2(0.5f, 0.5f);
+    uv.xy = uv.xy * _MainTextureScaleOffset.xy + _MainTextureScaleOffset.zw;
+    uv.y = 1.0f - uv.y;
+    OutColor = _MainTex.Sample(_MainTexSampler, uv);
+#if LGUI_COLORCORRECT
+    OutColor.rgb = LinearizeColor(OutColor.rgb);
+#endif
+}

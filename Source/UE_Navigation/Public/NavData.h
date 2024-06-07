@@ -20,21 +20,13 @@ public:
 	
 public:
 
-	UPROPERTY(BlueprintReadWrite)
 	double pos_x;
-	UPROPERTY(BlueprintReadWrite)
 	double pos_y;
-	UPROPERTY(BlueprintReadWrite)
 	double angle;
-	UPROPERTY(BlueprintReadWrite)
 	double distance;
 
-	UPROPERTY(BluePrintReadOnly)
 	bool behind;
-
-	UPROPERTY(BluePrintReadOnly)
 	bool outsideScreen;
 
-	UPROPERTY(BluePrintReadOnly)
 	FVector2D realPos;
 };

@@ -18,9 +18,7 @@ public class UE_Navigation : ModuleRules
 			"InputCore", 
 			"EnhancedInput",
 			"UMG",
-			"UMGEditor",
             "BlueprintGraph",
-
         });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

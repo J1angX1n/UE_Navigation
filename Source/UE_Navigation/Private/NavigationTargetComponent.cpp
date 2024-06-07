@@ -8,12 +8,17 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Containers/Array.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/Pawn.h"
 #include "NavData.h"
 #include "GameFramework/PlayerController.h"
 #include "NavMacros.h"
 #include "Components/TextBlock.h"
 #include "Math/UnrealMathUtility.h"
 #include "Blueprint/WidgetLayoutLibrary.h"
+#include "Engine/World.h"
+#include "Engine/LocalPlayer.h"
+#include "Engine/GameViewportClient.h"
+#include "SceneView.h"
 
 // Sets default values for this component's properties
 UNavigationTargetComponent::UNavigationTargetComponent()
