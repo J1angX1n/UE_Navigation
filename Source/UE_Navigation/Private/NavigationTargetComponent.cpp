@@ -140,10 +140,12 @@ void UNavigationTargetComponent::ShowInside()
 	{
 		WidgetInside->AddToViewport();
 	}
+	
+	WidgetInside->SetVisibility(ESlateVisibility::Visible);
 
 	if (WidgetOutside->IsInViewport())
 	{
-		WidgetOutside->RemoveFromParent();
+		WidgetOutside->SetVisibility(ESlateVisibility::Collapsed);
 	}
 
 	m_NavData->outsideScreen = false;
@@ -172,13 +174,15 @@ void UNavigationTargetComponent::ShowOutside()
 
 	if (WidgetInside->IsInViewport())
 	{
-		WidgetInside->RemoveFromParent();
+		WidgetInside->SetVisibility(ESlateVisibility::Collapsed);
 	}
 
 	if (!WidgetOutside->IsInViewport())
 	{
 		WidgetOutside->AddToViewport();
 	}
+	
+	WidgetOutside->SetVisibility(ESlateVisibility::Visible);
 
 	m_NavData->outsideScreen = true;
 	float Scale = UWidgetLayoutLibrary::GetViewportScale(this);
