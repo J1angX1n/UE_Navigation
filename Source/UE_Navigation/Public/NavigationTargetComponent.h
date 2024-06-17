@@ -73,6 +73,7 @@ protected:
 	UUserWidget* WidgetOutside;
 
 	//导航数据
+	UPROPERTY(Transient)
 	UNavData* m_NavData;
 
 	//当前所用UI的大小
